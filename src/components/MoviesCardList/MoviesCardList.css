@@ -1,0 +1,22 @@
+.movies-list {
+    display: grid;
+    list-style-type: none;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    row-gap: 37px;
+    column-gap: 24px;
+    padding: 70px 70px 80px;
+    margin: 0px auto;
+    justify-items: center;
+    background: #FFFFFF;
+}
+
+.films__button {
+    background: #F9F9F9;
+    border-radius: 6px;
+    color: #000000;
+    border: 0;
+    width: 1140px;
+    height: 36px;
+    text-align: center;
+    margin: 0 70px 80px;
+}
