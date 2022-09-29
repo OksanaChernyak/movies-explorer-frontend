@@ -1,5 +1,4 @@
 import "./AboutMe.css";
-import arrow from "../../images/arrow_icon.svg";
 import photo from "../../images/photo.jpg";
 
 function AboutMe() {

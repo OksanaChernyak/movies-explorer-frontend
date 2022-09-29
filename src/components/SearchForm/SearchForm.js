@@ -1,5 +1,4 @@
 import "./SearchForm.css";
-import icon from "../../images/search-icon.svg";
 
 function SearchForm() {
     return (
