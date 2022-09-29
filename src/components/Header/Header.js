@@ -1,8 +1,9 @@
 import "./Header.css";
 import logo from "../../images/logo.svg";
-import {Link, Route, Routes} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Header() {
+    const navigate = useNavigate();
     return (
         <header className="header">
             <Link to="/" >
@@ -13,7 +14,7 @@ function Header() {
                     /></Link>
                 <div className="header__menu">
                     <Link to="/signup" className="header__link">Регистрация</Link>
-                    <Link to="/signin"><button className="header__button_signin">Войти</button></Link>
+                    <button className="header__button-signin" onClick={() => navigate("/signin")}>Войти</button>
                 </div>
 
         </header>

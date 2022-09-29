@@ -1,5 +1,5 @@
 .search {
-    padding: 70px 70px 80px;
+    padding: 70px 70px 69px;
     border-bottom: 1px solid #E8E8E8;
 }
 
@@ -8,32 +8,37 @@
     background: #F9F9F9;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .search-form {
     width: 100%;
-    height: 72px;
     border-radius: 9px;
+    padding-top: 19px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #F9F9F9;
 }
 
 .search-form__input {
     background: #F9F9F9;
     background-image: url("../../images/search-icon.svg");
     background-repeat: no-repeat;
-    background-position: 28px 28px;
+    background-position: 28px 9px;
     border: 0;
     color: #A0A0A0;
     font-weight: 400;
     font-size: 18px;
     line-height: 20px;
     box-sizing: border-box;
-    height: 100%;
-    width: 90%;
+    border-radius: 9px;
 }
 
 .search-form__input::placeholder {
     position: absolute;
-    top: 25px;
+    top: 6px;
     left: 63px;
 }
 
@@ -47,6 +52,11 @@
     line-height: 18px;
     border-radius: 48px;
     border: 0;
+}
+
+.search-form__button:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .checkbox {
@@ -68,6 +78,11 @@
     margin-right: 14px;
 }
 
+.checkbox__input:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 .checkbox__input::before {
     content: "";
     background-image: url("../../images/tumbler-off.svg");
@@ -80,4 +95,55 @@
 
 .checkbox__input:checked::before {
     background-image: url("../../images/tumbler-on.svg");
+}
+
+@media screen and (max-width: 970px) {
+    .search-form__input {
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .search {
+        padding: 70px 30px 109px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .search {
+        padding: 80px 10px 44px;
+    }
+
+    .search__container {
+        flex-direction: column;
+        background: #FFFFFF;
+    }
+
+    .search-form {
+        height: 72px;
+        padding-top: 0;
+        padding-right: 0;
+    }
+
+    .checkbox {
+        background: #FFFFFF;
+        border-left: 0;
+        margin: 0 auto;
+        padding-top: 45px;
+        padding-bottom: 0;
+    }
+
+    .search-form__input {
+        background-image: none;
+        font-size: 14px;
+    }
+
+    .search-form__input::placeholder {
+        top: 25px;
+        left: 19px;
+    }
+
+    .search-form__button {
+        margin-top: 19px;
+        margin-right: 19px;
+    }
 }

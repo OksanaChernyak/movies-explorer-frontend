@@ -5,8 +5,10 @@ import {Link} from "react-router-dom";
 function Register() {
     return (
         <section className="register">
-            <img className="register__logo" alt="логотип" src={logo}/>
-            <h2 className="register__title">Добро пожаловать!</h2>
+            <div className="register__wrapper">
+                <img className="register__logo" alt="логотип" src={logo}/>
+                <h2 className="register__title">Добро пожаловать!</h2>
+            </div>
             <form className="register__container" name="register">
                 <fieldset className="register__inputs">
                     <label className="register__label" for="name-input">Имя</label>

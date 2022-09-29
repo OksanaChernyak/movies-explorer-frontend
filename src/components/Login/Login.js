@@ -5,8 +5,10 @@ import {Link} from "react-router-dom";
 function Login() {
     return (
         <section className="login">
-            <img className="login__logo" alt="логотип" src={logo}/>
-            <h2 className="login__title">Рады видеть!</h2>
+            <div className="login__wrapper">
+                <img className="login__logo" alt="логотип" src={logo}/>
+                <h2 className="login__title">Рады видеть!</h2>
+            </div>
             <form className="login__container" name="login">
                 <fieldset className="login__inputs">
                     <label className="login__label" htmlFor="email-input">E-mail</label>

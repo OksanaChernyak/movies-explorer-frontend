@@ -22,7 +22,6 @@
     width: 100%;
     padding: 0;
     margin: 0;
-
 }
 
 .portfolio__item {
@@ -55,6 +54,7 @@
     line-height: 50px;
     color: #000000;
     margin: 0;
+    padding: 0;
     text-align: left;
 }
 
@@ -62,4 +62,37 @@
     width: 29px;
     height: 60px;
     object-fit: contain;
+}
+
+@media screen and (max-width: 768px) {
+    .portfolio {
+        padding: 0 50px 90px;
+    }
+    .portfolio__text {
+        font-size: 28px;
+    }
+    .portfolio__icon {
+        width: 27px;
+    }
+}
+
+@media screen and (max-width: 555px) {
+    .portfolio {
+        padding: 0 14px 70px;
+    }
+    .portfolio__title {
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+    .portfolio__item {
+        height: 67px;
+    }
+    .portfolio__text {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .portfolio__icon {
+        width: 18px;
+        height: 28px;
+    }
 }

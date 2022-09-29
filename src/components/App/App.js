@@ -1,13 +1,12 @@
 import "./App.css";
-import Header from "../Header/Header";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import {Route, Routes} from "react-router-dom";
+import NotFound from "../NotFound/NotFound";
 
 
 export default App;
@@ -15,23 +14,22 @@ export default App;
 function App() {
     return (
         <div className="page">
-            <Header/>
-            <main className="main">
+            <main className="page__content">
                 <Routes>
                     <Route path="/signin"
                            element={<Login/>}/>
                     <Route path="/signup"
                            element={<Register/>}/>
                     <Route path="/movies"
-                           element={<Movies/>}/>
+                           element={<Movies isMovies={true}/>}/>
                     <Route path="/saved-movies"
-                           element={<SavedMovies/>}/>
+                           element={<SavedMovies isMovies={false}/>}/>
                     <Route path="/profile"
                            element={<Profile/>}/>
+                    <Route path="/notfound" element={<NotFound/>}/>
                     <Route path="/" element={<Main/>}/>
                 </Routes>
             </main>
-            <Footer/>
         </div>
     )
 };

@@ -1,8 +1,11 @@
 import "./Profile.css";
 import {Link} from "react-router-dom";
+import HeaderMovies from "../Header/HeaderMovies";
 
 function Profile() {
     return (
+        <>
+        <HeaderMovies/>
         <div className="profile">
             <form
                 name="profile"
@@ -44,10 +47,9 @@ function Profile() {
                     </button>
                     <Link to="/signin" className="profile__signout-link">Выйти из аккаунта</Link>
                 </fieldset>
-
             </form>
-
         </div>
+        </>
     )
 }
 

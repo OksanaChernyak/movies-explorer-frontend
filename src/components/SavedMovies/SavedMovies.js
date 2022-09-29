@@ -1,13 +1,16 @@
 import "./SavedMovies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import MoviesCard from "../MoviesCard/MoviesCard";
+import HeaderMovies from "../Header/HeaderMovies";
+import Footer from "../Footer/Footer";
 
-function SavedMovies() {
+function SavedMovies({isMovies}) {
     return (
         <div className="saved-movies">
+            <HeaderMovies/>
             <SearchForm/>
-            <MoviesCardList/>
+            <MoviesCardList isMovies={isMovies}/>
+            <Footer/>
         </div>
     )
 }

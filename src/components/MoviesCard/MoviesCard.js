@@ -1,7 +1,13 @@
 import "./MoviesCard.css";
 import image from "../../images/movie-image.png";
 
-function MoviesCard() {
+function MoviesCard({isLiked, isMovies, onLike, onDelete}) {
+    function handleLike () {
+        onLike();
+    };
+    function handleDelete () {
+        onDelete();
+    };
     return (
         <li className="movie">
             <img className="movie__pic" src={image} alt="Заглавная картинка для фильма"/>
@@ -9,8 +15,7 @@ function MoviesCard() {
                 <h2 className="movie__title">33 слова о дизайне</h2>
                 <span className="movie__duration">1ч 47м</span>
             </div>
-            <button className="movie__like-button" type="button"
-                    aria-label="Поставить лайк"></button>
+            <button className={isMovies ? `movie__like-button`: `movie__delete-button`} type="button" onClick={isMovies ? handleLike : handleDelete}></button>
         </li>
     )
 }
