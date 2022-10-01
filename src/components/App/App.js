@@ -14,7 +14,7 @@ export default App;
 function App() {
     return (
         <div className="page">
-            <main className="page__content">
+            <div className="page__content">
                 <Routes>
                     <Route path="/signin"
                            element={<Login/>}/>
@@ -29,7 +29,7 @@ function App() {
                     <Route path="/notfound" element={<NotFound/>}/>
                     <Route path="/" element={<Main/>}/>
                 </Routes>
-            </main>
+            </div>
         </div>
     )
 };

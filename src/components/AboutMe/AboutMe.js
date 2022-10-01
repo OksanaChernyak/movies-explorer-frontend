@@ -14,7 +14,7 @@ function AboutMe() {
                         Работала
                         в основном на себя, все работы творческие. Решила заняться веб-разработкой, недавно начала
                         кодить.</p>
-                    <a href="https://github.com/OksanaChernyak" className="about-me__github-link">Github</a>
+                    <a href="https://github.com/OksanaChernyak" className="about-me__github-link" target="_blank" rel="noreferrer">Github</a>
                 </div>
                 <img alt="моя фотография" src={photo} className="about-me__photo"/>
             </div>

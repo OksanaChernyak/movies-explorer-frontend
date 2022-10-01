@@ -10,10 +10,12 @@ function Movies({isMovies}) {
     return (
         <div className="movies">
             <HeaderMovies/>
-            <SearchForm/>
-            <Preloader/>
-            {/* <Preloader/> */ }
-            <MoviesCardList isMovies={isMovies}/>
+            <main>
+                <SearchForm/>
+                <Preloader/>
+                {/* <Preloader/> */}
+                <MoviesCardList isMovies={isMovies}/>
+            </main>
             <Footer/>
         </div>
     )

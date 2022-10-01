@@ -4,9 +4,9 @@ function SearchForm() {
     return (
         <section className="search">
             <div className="search__container">
-                <form className="search-form">
-                    <input className="search-form__input" placeholder="Фильм"/>
-                    <button className="search-form__button" type="button">Найти</button>
+                <form className="search-form" >
+                    <input className="search-form__input" placeholder="Фильм" required/>
+                    <button className="search-form__button" type="submit">Найти</button>
                 </form>
                 <div className="checkbox">
                     <label className="checkbox__label">
