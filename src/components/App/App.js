@@ -6,7 +6,7 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Main from "../Main/Main";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import NotFound from "../NotFound/NotFound";
 import * as mainApi from "../../utils/MainApi";
 import {moviesApi} from "../../utils/MoviesApi";
@@ -138,6 +138,7 @@ function App() {
                            element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile profile={currentUser} handleLogout={handleLogout} handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
                     <Route path="/*" element={<NotFound/>}/>
                     <Route path="/" element={<Main/>}/>
+                    <Route path="*" element={loggedIn ? <Navigate to="/movies"/> : <Navigate to="/signup"/>}/>
                 </Routes>
                 <Preloader isPreloaderActive={isPreloaderActive}/>
             </div>
