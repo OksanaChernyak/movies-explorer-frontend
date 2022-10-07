@@ -48,9 +48,9 @@ function App() {
         }
     }, [loggedIn]);
 
-    const handleLogin = (email, password) => {
+    const handleLogin = ({email, password}) => {
         setIsPreloaderActive(true);
-        mainApi.login(email, password)
+        mainApi.login({email, password})
             .then((res) => {
                 if (res.token) {
                     localStorage.setItem("token", res.token);
@@ -64,9 +64,9 @@ function App() {
             })
     };
 
-    const handleRegister = (name, email, password) => {
+    const handleRegister = ({name, email, password}) => {
         setIsPreloaderActive(true);
-        mainApi.register(name, email, password)
+        mainApi.register({name, email, password})
             .then((res) => {
                 console.log(res);
                 if (res) {

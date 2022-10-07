@@ -30,7 +30,7 @@ export const changeUserData = (data) => {
 };
 
 //authorization
-export const register = (name, email, password) => {
+export const register = ({name, email, password}) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
         headers: {
@@ -42,7 +42,7 @@ export const register = (name, email, password) => {
     })
         .then(checkRes);
 };
-export const login = (email, password) => {
+export const login = ({email, password}) => {
     return fetch(`${BASE_URL}/signin`, {
         method: 'POST',
         headers: {

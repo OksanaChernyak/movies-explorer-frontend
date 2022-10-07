@@ -21,7 +21,7 @@ function Register({handleRegister}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleRegister(name, email, password);
+        handleRegister({name, email, password});
     };
     return (
         <section className="register">
