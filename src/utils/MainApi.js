@@ -6,7 +6,7 @@ const checkRes = (response) => {
 
 //user
 export const getUserData = () => {
-    return fetch(`${BASE_URL}${"/users/me"}`, {
+    return fetch(`${BASE_URL_BACK}${"/users/me"}`, {
         method: "GET",
         headers: {
             'Content-Type':
@@ -17,14 +17,14 @@ export const getUserData = () => {
     })
         .then(checkRes);
 };
-export const changeUserData = (data) => {
-    return fetch(`${BASE_URL}${"/users/me"}`, {
+export const changeUserData = ({name, email}) => {
+    return fetch(`${BASE_URL_BACK}${"/users/me"}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            data
+            name, email
         })
     })
         .then(checkRes);

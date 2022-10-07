@@ -78,6 +78,15 @@ function App() {
                 setIsPreloaderActive(false);
             })
     };
+    const handleChangeProfile = ({name, email}) => {
+        mainApi.changeUserData({name, email})
+            .then((res) => {
+                setCurrentUser(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     const tokenCheck = () => {
         let token = localStorage.getItem("token");
@@ -108,7 +117,7 @@ function App() {
                     <Route path="/saved-movies"
                            element={<ProtectedRoute path="/saved-movies" loggedIn={loggedIn}><SavedMovies isMovies={false}/></ProtectedRoute>}/>
                     <Route path="/profile"
-                           element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile/></ProtectedRoute>}/>
+                           element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
                     <Route path="/*" element={<NotFound/>}/>
                     <Route path="/" element={<Main/>}/>
                 </Routes>

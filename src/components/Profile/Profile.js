@@ -1,8 +1,21 @@
 import "./Profile.css";
 import {Link} from "react-router-dom";
 import HeaderMovies from "../Header/HeaderMovies";
+import {useState} from "react";
 
-function Profile() {
+function Profile({handleChangeProfile}) {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const handleChangeName = (e) => {
+        setName(e.target.value)
+    };
+    const handleChangeEmail = (e) => {
+        setEmail(e.target.value)
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleChangeProfile({name, email});
+    };
     return (
         <>
         <HeaderMovies/>
@@ -10,6 +23,7 @@ function Profile() {
             <form
                 name="profile"
                 className="profile__container"
+                onSubmit={handleSubmit}
             >
                 <h2 className="profile__title">Привет, Оксана!</h2>
                 <fieldset className="profile__inputs">
@@ -20,7 +34,8 @@ function Profile() {
                             className="profile__input profile__input_type_name"
                             type="name"
                             id="name-input"
-                            value="Оксана"
+                            value={name}
+                            onChange={handleChangeName}
                             minLength="2"
                             maxLength="40"
                             required
@@ -33,7 +48,8 @@ function Profile() {
                             className="profile__input profile__input_type_email"
                             id="email-input"
                             type="Email"
-                            value="pochta@yandex.ru"
+                            value={email}
+                            onChange={handleChangeEmail}
                             minLength="2"
                             maxLength="40"
                             required
