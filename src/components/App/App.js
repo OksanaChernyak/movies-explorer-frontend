@@ -12,6 +12,7 @@ import * as mainApi from "../../utils/MainApi";
 import {moviesApi} from "../../utils/MoviesApi";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../../utils/ProtectedRoute";
+import Preloader from "../Preloader/Preloader";
 
 
 export default App;
@@ -134,6 +135,7 @@ function App() {
                     <Route path="/*" element={<NotFound/>}/>
                     <Route path="/" element={<Main/>}/>
                 </Routes>
+                <Preloader isPreloaderActive={isPreloaderActive}/>
             </div>
         </div>
         </CurrentUserContext.Provider>

@@ -12,7 +12,7 @@ function Movies({isMovies}) {
             <HeaderMovies/>
             <main>
                 <SearchForm/>
-                <Preloader/>
+
                 {/* <Preloader/> */}
                 <MoviesCardList isMovies={isMovies}/>
             </main>
