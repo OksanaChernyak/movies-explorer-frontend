@@ -80,6 +80,15 @@ function App() {
                 setIsPreloaderActive(false);
             })
     };
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setLoggedIn(false);
+        setCurrentUser({
+            name: "",
+            email: ""
+        })
+        navigate("/signin")
+    }
     const handleChangeProfile = ({name, email}) => {
         mainApi.changeUserData({name, email})
             .then((res) => {

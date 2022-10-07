@@ -33,7 +33,7 @@ function Profile({handleChangeProfile}) {
                 className="profile__container"
                 onSubmit={handleSubmit}
             >
-                <h2 className="profile__title">Привет, $`{name}`!</h2>
+                <h2 className="profile__title">Привет, {name}!</h2>
                 <fieldset className="profile__inputs">
                     <div className="profile__wrapper">
                         <label className="profile__label" htmlFor="name-input">
