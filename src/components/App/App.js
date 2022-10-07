@@ -59,6 +59,7 @@ function App() {
                     localStorage.setItem("token", res.token);
                     setLoggedIn(true);
                     navigate("/movies");
+                    setIsPreloaderActive(false);
                 }
             })
             .catch((err) => {
@@ -92,12 +93,15 @@ function App() {
         navigate("/")
     }
     const handleChangeProfile = ({name, email}) => {
+        setIsPreloaderActive(true);
         mainApi.changeUserData({name, email})
             .then((res) => {
                 setCurrentUser(res);
+                setIsPreloaderActive(false);
             })
             .catch((err) => {
                 console.log(err);
+                setIsPreloaderActive(false);
             });
     };
 
