@@ -88,7 +88,7 @@ function App() {
             name: "",
             email: ""
         })
-        navigate("/signin")
+        navigate("/")
     }
     const handleChangeProfile = ({name, email}) => {
         mainApi.changeUserData({name, email})
@@ -108,6 +108,7 @@ function App() {
                     setLoggedIn(true);
                 })
                 .catch((err) => {
+                    handleLogout();
                     console.log(err)
                 })
         }
