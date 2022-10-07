@@ -4,7 +4,7 @@ import {useState, useContext, useEffect} from "react";
 import HeaderMovies from "../Header/HeaderMovies";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
-function Profile({handleChangeProfile}) {
+function Profile({handleChangeProfile, handleLogout}) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const currentUser = useContext(CurrentUserContext);
@@ -69,7 +69,7 @@ function Profile({handleChangeProfile}) {
                         aria-label="Редактировать"
                     >Редактировать
                     </button>
-                    <Link to="/signin" className="profile__signout-link">Выйти из аккаунта</Link>
+                    <Link to="/signin" className="profile__signout-link" onClick={handleLogout}>Выйти из аккаунта</Link>
                 </fieldset>
             </form>
         </div>
