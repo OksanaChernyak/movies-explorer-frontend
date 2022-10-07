@@ -1,11 +1,12 @@
 const BASE_URL = 'https://oksanamovies.nomoredomains.sbs';
+const BASE_URL_BACK = 'https://api.oksanamovies.nomoredomains.sbs';
 const checkRes = (response) => {
     return response.ok ? response.json() : Promise.reject(` У нас все поломалось: ${response.status}`)
 }
 
 //user
 export const getUserData = () => {
-    return fetch(`${this._baseUrl}${"/users/me"}`, {
+    return fetch(`${BASE_URL}${"/users/me"}`, {
         method: "GET",
         headers: {
             'Content-Type':
@@ -17,7 +18,7 @@ export const getUserData = () => {
         .then(checkRes);
 };
 export const changeUserData = (data) => {
-    return fetch(`${this._baseUrl}${"/users/me"}`, {
+    return fetch(`${BASE_URL}${"/users/me"}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json'
@@ -31,7 +32,7 @@ export const changeUserData = (data) => {
 
 //authorization
 export const register = ({name, email, password}) => {
-    return fetch(`${BASE_URL}/signup`, {
+    return fetch(`${BASE_URL_BACK}/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -43,7 +44,7 @@ export const register = ({name, email, password}) => {
         .then(checkRes);
 };
 export const login = ({email, password}) => {
-    return fetch(`${BASE_URL}/signin`, {
+    return fetch(`${BASE_URL_BACK}/signin`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -53,7 +54,7 @@ export const login = ({email, password}) => {
         .then(checkRes)
 };
 export const getContent = (token) => {
-    return fetch(`${BASE_URL}/users/me`, {
+    return fetch(`${BASE_URL_BACK}/users/me`, {
         method: 'GET',
         headers: {
             'Content-Type':
@@ -67,7 +68,7 @@ export const getContent = (token) => {
 
 //movies
 export const getMovies = (token) => {
-    return fetch(`${BASE_URL}/movies`, {
+    return fetch(`${BASE_URL_BACK}/movies`, {
         method: 'GET',
         headers: {
             'Content-Type':
@@ -80,7 +81,7 @@ export const getMovies = (token) => {
 };
 
 export const postMovie = (movie) => {
-    return fetch(`${BASE_URL}/movies`, {
+    return fetch(`${BASE_URL_BACK}/movies`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -93,7 +94,7 @@ export const postMovie = (movie) => {
 };
 
 export const deleteMovie = (movieId) => {
-    return fetch(`${BASE_URL}/movies/${movieId}`, {
+    return fetch(`${BASE_URL_BACK}/movies/${movieId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
