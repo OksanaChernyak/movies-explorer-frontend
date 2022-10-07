@@ -1,0 +1,153 @@
+.about-project {
+    padding: 110px 70px;
+}
+
+.about-project__title {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    color: #000000;
+    padding: 0 0 23px 0;
+    margin: 0;
+    border-bottom: 1px solid #000000;
+}
+
+.about-project__columns {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 70px auto 0;
+}
+
+.about-project__column {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-project__column:first-child {
+    margin-right: 40px;
+}
+
+.about-project__subtitle {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    padding: 0;
+    margin: 0 auto 26px 0;
+}
+
+.about-project__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    padding: 0;
+    margin: 0;
+}
+
+.progressbar {
+    margin-top: 110px;
+    width: 100%;
+}
+
+.progressbar__row {
+    height: 36px;
+}
+
+.progressbar__row_type_capture {
+    height: 31px;
+}
+
+.progressbar__bar {
+    height: 100%;
+    color: #000000;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 36px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.progressbar__bar_type_back {
+    width: 20%;
+    background: #2BE080;
+}
+
+.progressbar__bar_type_front {
+    background: #F2F2F2;
+}
+
+.progressbar__capture {
+    padding-top: 14px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project {
+        padding: 90px 50px;
+    }
+    .about-project__column:first-child {
+        margin-right: 30px;
+    }
+    .about-project__subtitle {
+        margin-bottom: 22px;
+    }
+    .progressbar {
+        margin-top: 93px;
+    }
+}
+
+@media screen and (max-width: 555px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+    .about-project__title {
+        padding-bottom: 28px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .about-project__columns {
+        flex-direction: column;
+        margin: 60px auto 0;
+    }
+    .about-project__column:first-child {
+        margin-right: 0;
+        margin-bottom: 56px;
+    }
+    .about-project__subtitle {
+        margin-bottom: 16px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .about-project__text {
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .progressbar {
+        margin-top: 60px;
+    }
+    .progressbar__row {
+        height: 35px;
+    }
+    .progressbar__bar {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .progressbar__row {
+        height: 35px;
+    }
+    .progressbar__row_type_capture {
+        height: 23px;
+    }
+    .progressbar__capture {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
