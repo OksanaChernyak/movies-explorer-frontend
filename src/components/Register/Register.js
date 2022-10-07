@@ -1,36 +1,59 @@
 import "./Register.css";
 import logo from "../../images/logo.svg";
 import {Link} from "react-router-dom";
+import {useState} from "react";
 
-function Register() {
+function Register({handleRegister}) {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleChangeName = (e) => {
+        setName(e.target.value)
+    };
+    const handleChangeEmail = (e) => {
+        setEmail(e.target.value)
+    };
+
+    const handleChangePassword = (e) => {
+        setPassword(e.target.value)
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleRegister(name, email, password);
+    };
     return (
         <section className="register">
             <div className="register__wrapper">
                 <img className="register__logo" alt="логотип" src={logo}/>
                 <h2 className="register__title">Добро пожаловать!</h2>
             </div>
-            <form className="register__container" name="register">
+            <form className="register__container" name="register" onSubmit={handleSubmit}>
                 <fieldset className="register__inputs">
-                    <label className="register__label" for="name-input">Имя</label>
+                    <label className="register__label" htmlFor="name-input">Имя</label>
                     <input className="register__input" id="name-input"
                            type="name"
-                           value="Оксана"
+                           value={name}
+                           onChange={handleChangeName}
                            minLength="2"
                            maxLength="40"
                            required/>
                     <span className="error name-input-error"></span>
-                    <label className="register__label" for="email-input">E-mail</label>
+                    <label className="register__label" htmlFor="email-input">E-mail</label>
                     <input className="register__input" id="email-input"
                            type="Email"
-                           value="pochta@yandex.ru"
+                           value={email}
+                           onChange={handleChangeEmail}
                            minLength="2"
                            maxLength="40"
                            required/>
                     <span className="error email-input-error"></span>
-                    <label className="register__label" for="password-input">Пароль</label>
+                    <label className="register__label" htmlFor="password-input">Пароль</label>
                     <input className="register__input" id="password-input"
                            type="password"
-                           value="ffff"
+                           value={password}
+                           onChange={handleChangePassword}
                            minLength="2"
                            maxLength="40"
                            required
