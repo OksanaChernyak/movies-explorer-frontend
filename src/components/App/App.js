@@ -19,6 +19,8 @@ export default App;
 function App() {
     const [currentUser, setCurrentUser] = useState({});
     const [movies, setMovies] = useState([]);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
     const [loggedIn, setLoggedIn] = useState(false);
     const [isPreloaderActive, setIsPreloaderActive] = useState(false);
     const navigate = useNavigate();
@@ -117,7 +119,7 @@ function App() {
                     <Route path="/saved-movies"
                            element={<ProtectedRoute path="/saved-movies" loggedIn={loggedIn}><SavedMovies isMovies={false}/></ProtectedRoute>}/>
                     <Route path="/profile"
-                           element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
+                           element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile name={name} email={email} handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
                     <Route path="/*" element={<NotFound/>}/>
                     <Route path="/" element={<Main/>}/>
                 </Routes>
