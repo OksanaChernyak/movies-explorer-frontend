@@ -1,8 +1,18 @@
 import "./Profile.css";
 import {Link} from "react-router-dom";
+import {useState, useContext, useEffect} from "react";
 import HeaderMovies from "../Header/HeaderMovies";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
-function Profile({name, email, handleChangeProfile}) {
+function Profile({handleChangeProfile}) {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const currentUser = useContext(CurrentUserContext);
+
+    useEffect(() => {
+        currentUser.name !== undefined && setName(currentUser.name);
+        currentUser.email !== undefined && setEmail(currentUser.email)
+    }, [currentUser]);
 
     const handleChangeName = (e) => {
         setName(e.target.value)

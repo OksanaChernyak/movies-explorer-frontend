@@ -119,7 +119,7 @@ function App() {
                     <Route path="/saved-movies"
                            element={<ProtectedRoute path="/saved-movies" loggedIn={loggedIn}><SavedMovies isMovies={false}/></ProtectedRoute>}/>
                     <Route path="/profile"
-                           element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile name={name} email={email} handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
+                           element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile profile={currentUser} handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
                     <Route path="/*" element={<NotFound/>}/>
                     <Route path="/" element={<Main/>}/>
                 </Routes>
