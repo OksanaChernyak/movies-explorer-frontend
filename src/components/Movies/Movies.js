@@ -6,7 +6,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 
 
-function Movies({isMovies, apiItems, isPreloaderActive, savedMovies, handleMovieDelete, handleMovieLike}) {
+function Movies({isMovies,isLiked, apiItems, isPreloaderActive, savedMovies, handleMovieDelete, handleMovieLike}) {
     const [searchResult, setSearchResult] = useState([]);
     const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
 
@@ -31,6 +31,7 @@ function Movies({isMovies, apiItems, isPreloaderActive, savedMovies, handleMovie
                 <SearchForm handleSearchButtonClick={handleSearchButtonClick}/>
                 <MoviesCardList movies={searchResult} someMoviesFound={someMoviesFound}
                                 isPreloaderActive={isPreloaderActive}
+                                isLiked={isLiked}
                                 isMovies={isMovies} savedMovies={savedMovies}
                                 handleMovieDelete={handleMovieDelete} handleMovieLike={handleMovieLike}/>
             </main>

@@ -190,16 +190,18 @@ function App() {
             })
     }
     //обработка удаления
-    const handleMovieDelete = (someMovieId) => {
+    const handleMovieDelete = (someMovie) => {
         savedMovies.map(
             (m) => {
-                if (m._id === someMovieId) {
-                    mainApi.deleteMovie(someMovieId)
+                if (m._id === someMovie) {
+                    mainApi.deleteMovie(someMovie)
                         .then((res) => {
-                            setSavedMovies(savedMovies.filter(m => m._id !== someMovieId));
+                            setSavedMovies(
+                                savedMovies.filter(m => m._id !== someMovie),
+                            );
                             localStorage.getItem(
                                 "liked",
-                                savedMovies.filter(m => m._id !== someMovieId)
+                                savedMovies.filter(m => m._id !== someMovie)
                             );
                         })
                         .catch((err) => {
@@ -208,6 +210,11 @@ function App() {
                 }
             })
     }
+    // функция для пробрасывания лайкнутости в фильмы и сохраненные фильмы - нашли есть ли подходящие элементы - значит тру
+    const isLiked = (movie) => {
+        return savedMovies.some(m => m.movieId === movie.id)
+    }
+
     //закрытие инфо-попапа
     const closeInfoPopup = () => {
         setIsInfoPopupOpen(false);
@@ -227,13 +234,14 @@ function App() {
                                element={<ProtectedRoute path="/movies" loggedIn={loggedIn}><Movies apiItems={apiItems}
                                                                                                    isPreloaderActive={isPreloaderActive}
                                                                                                    isMovies={true}
+                                                                                                   isLiked={isLiked}
                                                                                                    savedMovies={savedMovies}
                                                                                                    handleMovieLike={handleMovieLike}
                                                                                                    handleMovieDelete={handleMovieDelete}
                                /></ProtectedRoute>}/>
                         <Route path="/saved-movies"
                                element={<ProtectedRoute path="/saved-movies" loggedIn={loggedIn}><SavedMovies
-                                   savedMovies={savedMovies} isMovies={false} handleMovieDelete={handleMovieDelete}
+                                   savedMovies={savedMovies} isLiked={isLiked} isMovies={false} handleMovieDelete={handleMovieDelete}
                                /></ProtectedRoute>}/>
                         <Route path="/profile"
                                element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile

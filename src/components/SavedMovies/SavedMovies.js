@@ -5,7 +5,7 @@ import HeaderMovies from "../Header/HeaderMovies";
 import Footer from "../Footer/Footer";
 import {useState, useEffect} from "react";
 
-function SavedMovies({isMovies, savedMovies, isMovieLiked, handleMovieDelete}) {
+function SavedMovies({isMovies, savedMovies,isLiked, isMovieLiked, handleMovieDelete}) {
     const [searchResult, setSearchResult] = useState([]);
     const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
 
@@ -26,7 +26,7 @@ function SavedMovies({isMovies, savedMovies, isMovieLiked, handleMovieDelete}) {
             <HeaderMovies/>
             <main>
                 <SearchForm handleSearchButtonClick={handleSearchButtonClick}/>
-                <MoviesCardList movies={searchResult} someMoviesFound={someMoviesFound} savedMovies={savedMovies}
+                <MoviesCardList movies={searchResult} isLiked={isLiked} someMoviesFound={someMoviesFound} savedMovies={savedMovies}
                                 isMovieLiked={isMovieLiked} isMovies={isMovies} handleMovieDelete={handleMovieDelete}/>
             </main>
             <Footer/>

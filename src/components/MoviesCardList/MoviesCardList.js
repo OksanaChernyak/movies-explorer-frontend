@@ -4,7 +4,7 @@ import Preloader from "../Preloader/Preloader";
 import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
 
-function MoviesCardList({movies, savedMovies, handleMovieDelete, handleMovieLike, someMoviesFound, isPreloaderActive}) {
+function MoviesCardList({movies, savedMovies,isLiked, handleMovieDelete, handleMovieLike, someMoviesFound, isPreloaderActive}) {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [moviesCounter, setMoviesCounter] = useState(0);
     const [moreMoviesCounter, setMoreMoviesCounter] = useState(0);
@@ -56,7 +56,7 @@ function MoviesCardList({movies, savedMovies, handleMovieDelete, handleMovieLike
                             нашлось</p></>) : (
                             (location.pathname === "/movies") ?
                                 (movies.slice(0, shownMovies).map((movie) => (
-                                <MoviesCard movie={movie} key={movie.id || movie._id} savedMovies={savedMovies} handleMovieDelete={handleMovieDelete}
+                                <MoviesCard movie={movie} key={movie.id || movie._id} isLiked={isLiked} savedMovies={savedMovies} handleMovieDelete={handleMovieDelete}
                                             handleMovieLike={handleMovieLike}/>
                             ))
                         ) : (movies.map((movie) => (<MoviesCard movie={movie} key={movie.id || movie._id} savedMovies={savedMovies} handleMovieDelete={handleMovieDelete}
