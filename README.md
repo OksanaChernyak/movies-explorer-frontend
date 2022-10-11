@@ -7,5 +7,6 @@
 * CSS
 * JavaScript
 * React
-  [Здесь](https://www.figma.com/file/viiAj1HV3AftwMjBZ1bMKN/Diploma-(Copy)?node-id=932%3A3806) можно посмотреть как выглядит макет.
-* [Здесь](https://oksanamovies.nomoredomains.sbs) лежит фронтенд-часть.
+  
+[Здесь](https://www.figma.com/file/viiAj1HV3AftwMjBZ1bMKN/Diploma-(Copy)?node-id=932%3A3806) можно посмотреть как выглядит макет.
+[Здесь](https://oksanamovies.nomoredomains.sbs) лежит фронтенд-часть.
