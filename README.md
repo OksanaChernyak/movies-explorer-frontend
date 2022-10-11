@@ -10,8 +10,8 @@
 
 ССЫЛКИ
 
-*[Пуллреквест level-3](https://github.com/OksanaChernyak/movies-explorer-frontend/pull/2)
+* [Пуллреквест level-3](https://github.com/OksanaChernyak/movies-explorer-frontend/pull/2)
 
-*[Здесь](https://www.figma.com/file/viiAj1HV3AftwMjBZ1bMKN/Diploma-(Copy)?node-id=932%3A3806) можно посмотреть как выглядит макет.
+* [Здесь](https://www.figma.com/file/viiAj1HV3AftwMjBZ1bMKN/Diploma-(Copy)?node-id=932%3A3806) можно посмотреть как выглядит макет.
 
-*[Здесь](https://oksanamovies.nomoredomains.sbs) лежит фронтенд-часть.
+* [Здесь](https://oksanamovies.nomoredomains.sbs) лежит фронтенд-часть.
