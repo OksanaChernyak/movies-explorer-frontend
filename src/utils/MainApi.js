@@ -1,4 +1,4 @@
-const BASE_URL = 'https://oksanamovies.nomoredomains.sbs';
+const IMAGE_URL = 'https://api.nomoreparties.co';
 const BASE_URL_BACK = 'https://api.oksanamovies.nomoredomains.sbs';
 const checkRes = (response) => {
     return response.ok ? response.json() : Promise.reject(` У нас все поломалось: ${response.status}`)
@@ -17,14 +17,16 @@ export const getUserData = () => {
     })
         .then(checkRes);
 };
-export const changeUserData = ({name, email}) => {
+export const changeUserData = (data) => {
     return fetch(`${BASE_URL_BACK}${"/users/me"}`, {
         method: "PATCH",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization:
+                `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({
-            name, email
+            name: data.name, email: data.email
         })
     })
         .then(checkRes);
@@ -67,7 +69,7 @@ export const getContent = (token) => {
 }
 
 //movies
-export const getMovies = (token) => {
+export const getMovies = () => {
     return fetch(`${BASE_URL_BACK}/movies`, {
         method: 'GET',
         headers: {
@@ -80,14 +82,26 @@ export const getMovies = (token) => {
         .then(checkRes);
 };
 
-export const postMovie = (movie) => {
+export const addMovie = (movie) => {
     return fetch(`${BASE_URL_BACK}/movies`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization:
+                `Bearer ${localStorage.getItem("token")}`
         },
         body: JSON.stringify({
-            movie
+            country: movie.country,
+            director: movie.director,
+            duration: movie.duration,
+            year: movie.year,
+            description: movie.description,
+            image: `${IMAGE_URL}${movie.image.url}`,
+            trailerLink: movie.trailerLink,
+            thumbnail: `${IMAGE_URL}${movie.image.formats.thumbnail.url}`,
+            movieId: movie.id,
+            nameRU: movie.nameRU,
+            nameEN: movie.nameEN,
         })
     })
         .then(checkRes);
@@ -97,7 +111,9 @@ export const deleteMovie = (movieId) => {
     return fetch(`${BASE_URL_BACK}/movies/${movieId}`, {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization:
+                `Bearer ${localStorage.getItem("token")}`
         },
     })
         .then(checkRes);

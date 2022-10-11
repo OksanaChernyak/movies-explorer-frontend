@@ -3,14 +3,31 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import HeaderMovies from "../Header/HeaderMovies";
 import Footer from "../Footer/Footer";
+import {useState, useEffect} from "react";
 
-function SavedMovies({isMovies}) {
+function SavedMovies({isMovies, savedMovies, isMovieLiked, handleMovieDelete}) {
+    const [searchResult, setSearchResult] = useState([]);
+    const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
+
+    useEffect(()=> {
+        showSearchResult();
+    }, []);
+
+    const handleSearchButtonClick = (searchRequest, shortie) => {
+        const searchResult = savedMovies.filter((item) => item.nameRU.includes(searchRequest));
+        shortie ? setSearchResult(searchResult.filter((item) => item.duration <= 40)) : setSearchResult(searchResult);
+        (searchResult.length > 0) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
+    }
+    const showSearchResult = () => {
+        setSearchResult(savedMovies);
+    }
     return (
         <div className="saved-movies">
             <HeaderMovies/>
             <main>
-                <SearchForm/>
-                <MoviesCardList isMovies={isMovies}/>
+                <SearchForm handleSearchButtonClick={handleSearchButtonClick}/>
+                <MoviesCardList movies={searchResult} someMoviesFound={someMoviesFound} savedMovies={savedMovies}
+                                isMovieLiked={isMovieLiked} isMovies={isMovies} handleMovieDelete={handleMovieDelete}/>
             </main>
             <Footer/>
         </div>

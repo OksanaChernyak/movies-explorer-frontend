@@ -1,9 +1,10 @@
 import "./BurgerMenu.css";
 import {Link} from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 
 function BurgerMenu({isOpen, onClose}) {
     const navigate = useNavigate();
+    const location = useLocation();
     return (
         <section className={isOpen ? `burger burger__overlay burger_opened` : `burger burger__overlay`}>
             <div className="burger__container">
@@ -11,18 +12,18 @@ function BurgerMenu({isOpen, onClose}) {
                 <ul className="burger__items">
                     <li className="burger__item"><Link
                         to="/"
-                        className="burger__link"
+                        className={location.pathname === "/" ? `burger__link burger__link_active` : `burger__link`}
                     >Главная</Link></li>
                     <li className="burger__item">
                         <Link
                             to="/movies"
-                            className="burger__link burger__link_active"
+                            className={location.pathname === "/movies" ? `burger__link burger__link_active` : `burger__link`}
                         >Фильмы</Link>
                     </li>
                     <li className="burger__item">
                         <Link
                             to="/saved-movies"
-                            className="burger__link"
+                            className={location.pathname === "/saved-movies" ? `burger__link burger__link_active` : `burger__link`}
                         >Сохраненные фильмы</Link>
                     </li>
                 </ul>

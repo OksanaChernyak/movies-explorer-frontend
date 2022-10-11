@@ -19,6 +19,7 @@ function AboutProject() {
                 </div>
             </div>
             <table className="progressbar">
+                <tbody>
                 <tr className="progressbar__row">
                     <td className="progressbar__bar progressbar__bar_type_back">1 неделя</td>
                     <td className="progressbar__bar progressbar__bar_type_front">4 недели</td>
@@ -27,6 +28,7 @@ function AboutProject() {
                     <td className=" progressbar__capture">Back-end</td>
                     <td className="progressbar__capture">Front-end</td>
                 </tr>
+                </tbody>
             </table>
 
 
