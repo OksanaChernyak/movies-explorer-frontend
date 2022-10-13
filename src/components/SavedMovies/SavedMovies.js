@@ -5,7 +5,7 @@ import HeaderMovies from "../Header/HeaderMovies";
 import Footer from "../Footer/Footer";
 import {useState, useEffect} from "react";
 
-function SavedMovies({isMovies, savedMovies,isLiked, isMovieLiked, handleMovieDelete}) {
+function SavedMovies({isMovies, savedMovies, isLiked, isMovieLiked, handleMovieDelete}) {
     const [searchResult, setSearchResult] = useState([]);
     const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
 

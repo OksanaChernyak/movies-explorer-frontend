@@ -10,7 +10,7 @@ function Movies({isMovies, isLiked, apiItems, isPreloaderActive, savedMovies, ha
     const [searchResult, setSearchResult] = useState([]);
     const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
 
-    useEffect(()=> {
+    useEffect(() => {
         showSearchResult();
     }, []);
 
@@ -19,11 +19,14 @@ function Movies({isMovies, isLiked, apiItems, isPreloaderActive, savedMovies, ha
         shortie ? setSearchResult(searchResult.filter((item) => item.duration <= 40)) : setSearchResult(searchResult);
         (searchResult.length > 0) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
         localStorage.setItem("mySearch", JSON.stringify(searchRequest));
-        console.log(searchResult)
     }
 
     const showSearchResult = () => {
-        setSearchResult(apiItems.filter((item) => item.nameRU.toLowerCase().includes(JSON.parse(localStorage.getItem("mySearch")).toLowerCase())));
+        if (localStorage.getItem("mySearch")) {
+            setSearchResult(apiItems.filter((item) => item.nameRU.toLowerCase().includes(JSON.parse(localStorage.getItem("mySearch")).toLowerCase())));
+        } else {
+            setSearchResult([])
+        }
     }
 
     return (
