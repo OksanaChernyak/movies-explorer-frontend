@@ -7,7 +7,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Main from "../Main/Main";
 import InfoPopup from "../InfoPopup/InfoPopup";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import NotFound from "../NotFound/NotFound";
 import * as mainApi from "../../utils/MainApi";
 import {moviesApi} from "../../utils/MoviesApi";
@@ -29,10 +29,12 @@ function App() {
     const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
     const [notification, setNotification] = useState({text: ""});
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         tokenCheck()
     }, []);
+
     useEffect(() => {
         if (loggedIn) {
             navigate("/movies")
@@ -51,7 +53,9 @@ function App() {
                 console.log(err);
             });
 
-    }, [loggedIn, user]);
+    }, [user]);
+
+
    //функция регистрации
     const handleRegister = ({name, email, password}) => {
         setIsPreloaderActive(true);
@@ -105,13 +109,21 @@ function App() {
         localStorage.removeItem("token");
         localStorage.removeItem("shortie");
         localStorage.removeItem("liked");
-        setLoggedIn(false);
+        localStorage.removeItem("mySearch");
+        localStorage.removeItem("movies");
+        localStorage.clear();
         setCurrentUser({});
+        setApiItems([]);
+        setSavedMovies([]);
+        setLoggedIn(false);
+
         navigate("/");
     };
     // при изменении профиля что происходит
     const handleChangeProfile = (user) => {
         setIsPreloaderActive(true);
+        tokenCheck();
+
         mainApi.changeUserData(user)
             .then((res) => {
                 setCurrentUser(res);
@@ -138,16 +150,24 @@ function App() {
                 .then((res) => {
                     setCurrentUser(res);
                     setLoggedIn(true);
+                    navigate(location)
                 })
                 .catch((err) => {
                     console.log(err)
+                    setIsInfoPopupOpen(true);
+                    setNotification({text: "Переданный токен некорректен. Вам отказано в доступе"})
+                    handleLogout();
                 })
+        } else {
+            handleLogout();
+            setIsInfoPopupOpen(true);
+            setNotification({text: "Переданный токен некорректен. Вам отказано в доступе"})
         }
     }
     //получим массив со стороннего апи
     const getMoviesFromApi = () => {
         setIsPreloaderActive(true);
-        return moviesApi.getMovies().then(
+         moviesApi.getMovies().then(
             (apiItems) => {
                 if (apiItems) {
                     setApiItems(apiItems);
@@ -164,6 +184,7 @@ function App() {
     }
     // получим сохраненные фильмы
     const getMySavedMovies = (user) => {
+        tokenCheck();
         mainApi.getMovies().then((res) => {
             setSavedMovies(res.filter((m) => m.owner === user));
             localStorage.setItem(
@@ -178,7 +199,12 @@ function App() {
     // обработка попадания в сохраненные
     const handleMovieLike = (someMovie) => {
         const likedMovie = savedMovies.find((m) => m.movieId === someMovie.id);
-
+        if (!someMovie.trailerLink.startsWith('http')) {
+            someMovie.trailerLink = "https://www.youtube.com/watch?v=D220J3AR-E8"
+        } else if (someMovie.nameEN === undefined) {
+            someMovie.nameEN = "noName"
+        }
+        tokenCheck();
         (likedMovie) ? handleMovieDelete(likedMovie) :
             mainApi.addMovie(someMovie).then((res) => {
                 setSavedMovies((savedMovies) => [...savedMovies, res
@@ -187,22 +213,28 @@ function App() {
                     "liked",
                     JSON.stringify([...savedMovies, res])
                 );
-            })
+            }).catch(
+                (err) => {
+                    console.log(err);
+
+                }
+            )
     }
     //обработка удаления
     const handleMovieDelete = (someMovie) => {
+        tokenCheck();
         savedMovies.map(
             (m) => {
                 if (m._id === someMovie) {
                     mainApi.deleteMovie(someMovie)
                         .then((res) => {
-                            setSavedMovies(
-                                savedMovies.filter(m => m._id !== someMovie),
-                            );
+                            setSavedMovies(savedMovies.filter(m => m._id !== someMovie));
+                            console.log(someMovie)
                             localStorage.getItem(
                                 "liked",
                                 savedMovies.filter(m => m._id !== someMovie)
                             );
+                            isLiked(someMovie)
                         })
                         .catch((err) => {
                             console.log(err)

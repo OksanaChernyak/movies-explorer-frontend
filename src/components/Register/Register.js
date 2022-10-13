@@ -77,7 +77,12 @@ function Register({handleRegister}) {
     return (
         <section className="register">
             <div className="register__wrapper">
-                <img className="register__logo" alt="логотип" src={logo}/>
+                <Link to="/" >
+                    <img
+                        className="register__logo"
+                        alt="Логотип проекта"
+                        src={logo}
+                    /></Link>
                 <h2 className="register__title">Добро пожаловать!</h2>
             </div>
             <form className="register__container" name="register" onSubmit={handleSubmit} noValidate>

@@ -1,30 +1,37 @@
 import "./SearchForm.css";
 import {useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
 
 function SearchForm({handleSearchButtonClick}) {
+    let mySearch = localStorage.getItem("mySearch");
     const [searchRequest, setSearchRequest] = useState("");
-    const [shortie, setShortie] = useState(false);
-    const [searchError, setSearchError] = useState(("Введите ключевое слово"));
-    const [isFormValid, setIsFormValid] = useState(false);
+    const [shortie, setShortie] = useState((localStorage.getItem("shortie")) ? (JSON.parse(localStorage.getItem("shortie"))) : false);
+    const [searchError, setSearchError] = useState((""));
+    const location = useLocation();
 
-    const [searchTouched, setSearchTouched] = useState(false);
     useEffect(() => {
-        if (searchError) {
-            setIsFormValid(false)
-        } else {
-            setIsFormValid(true)
-        }
-    }, [searchError]);
+        if (location.pathname === "/movies") {
+        if(mySearch) {
+            setSearchRequest(JSON.parse(mySearch))
+        }}
+    }, []);
 
     //поменяй состояние чекбокса, если в локалке есть короткометражки
     useEffect(() => {
         setShortie(JSON.parse(localStorage.getItem("shortie")))
     }, []);
+
     //отправка формы поиска - кнопка найти
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleSearchButtonClick(searchRequest, shortie);
-        localStorage.setItem("shortie", JSON.stringify(shortie))
+        if (!searchRequest) {
+            setSearchError("Нужно ввести ключевое слово")
+
+        } else {
+            setSearchError("")
+            handleSearchButtonClick(searchRequest, shortie);
+            localStorage.setItem("shortie", JSON.stringify(shortie))
+        }
     }
     //меняем состояние чекбокса
     const toggleCheckbox = () => {
@@ -40,34 +47,18 @@ function SearchForm({handleSearchButtonClick}) {
     }
     //при введении символов в инпут - меняется запрос
     const handleSearchInput = (e) => {
-        setSearchRequest(e.target.value)
-
-        if (!e.target.value) {
-            setSearchError("Введите ключевое слово для поиска")
-        } else {
-            setSearchError("");
-        }
-    }
-    const handleBlur = (e) => {
-        switch (e.target.name) {
-            case "search":
-                setSearchTouched(true)
-                break
-
-        }
+            setSearchRequest(e.target.value);
     }
 
     return (
         <section className="search">
-            <span className={(searchTouched && searchError)
-                ? "error error_active"
-                : "error"}>{searchError}</span>
+            <span className={"error error_active" }>{searchError}</span>
             <div className="search__container">
                 <form className="search-form" onSubmit={handleSubmit} noValidate>
                     <input className="search-form__input" placeholder="Фильм" name="search" value={searchRequest}
-                           onChange={handleSearchInput} onBlur={handleBlur} required/>
-                    <button className={isFormValid ? "search-form__button" : "search-form__button_disabled"}
-                            onSubmit={handleSubmit} type="submit" disabled={!isFormValid}>Найти
+                           onChange={handleSearchInput} required/>
+                    <button className="search-form__button"
+                            onSubmit={handleSubmit} type="submit">Найти
                     </button>
                 </form>
                 <div className="checkbox">

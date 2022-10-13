@@ -5,22 +5,26 @@ import HeaderMovies from "../Header/HeaderMovies";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 function Profile({handleChangeProfile, handleLogout}) {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    const currentUser = useContext(CurrentUserContext);
+    const [name, setName] = useState(currentUser.name);
+    const [email, setEmail] = useState(currentUser.email);
     const [nameTouched, setNameTouched] = useState(false);
     const [emailTouched, setEmailTouched] = useState(false);
-    const [nameError, setNameError] = useState(("Укажите ваше имя, поле не может быть пустым"));
-    const [emailError, setEmailError] = useState(("Укажите адрес почты, поле не может быть пустым"));
+    const [nameError, setNameError] = useState((""));
+    const [emailError, setEmailError] = useState((""));
     const [isFormValid, setIsFormValid] = useState(false);
-    const currentUser = useContext(CurrentUserContext);
+
 //если есть ошибки в заполнении формы, то тогда форма невалидна
     useEffect(() => {
         if (emailError ||  nameError) {
             setIsFormValid(false)
-        } else {
+        } else if (email === currentUser.email && name === currentUser.name){
+            setIsFormValid(false)
+        }
+        else {
             setIsFormValid(true)
         }
-    }, [nameError,emailError]);
+    }, [nameError,emailError, currentUser.email, currentUser.name, emailTouched, nameTouched, email, name]);
 
     useEffect(() => {
         currentUser.name !== undefined && setName(currentUser.name);
@@ -43,6 +47,9 @@ function Profile({handleChangeProfile, handleLogout}) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!re.test(String(e.target.value).toLowerCase())) {
             setEmailError("Неверный формат электронной почты")
+            if (!e.target.value) {
+                setEmailError("Укажите адрес почты, поле не может быть пустым")
+            }
         } else {
             setEmailError("")
         }
@@ -52,6 +59,7 @@ function Profile({handleChangeProfile, handleLogout}) {
         e.preventDefault();
         handleChangeProfile({name, email});
     };
+
     //при уходе из поля ввода меняет стейты, отвечающие за то, было ли что-то введено в инпуты
     const handleBlur = (e) => {
         switch (e.target.name) {
@@ -100,7 +108,7 @@ function Profile({handleChangeProfile, handleLogout}) {
                         <input
                             className="profile__input profile__input_type_email"
                             id="email-input"
-                            type="Email"
+                            type="email"
                             name="email"
                             value={email}
                             onChange={handleChangeEmail}
@@ -115,7 +123,7 @@ function Profile({handleChangeProfile, handleLogout}) {
                         ? "error error_active email-input-error"
                         : "error email-input-error"}>{emailError}</span>
                     <button
-                        className={(isFormValid && (emailTouched || nameTouched)) ? "profile__submit-button" : "profile__submit-button_disabled"}
+                        className={(isFormValid) ? "profile__submit-button" : "profile__submit-button_disabled"}
                         type="submit"
                         aria-label="Редактировать"
                         disabled={!isFormValid}

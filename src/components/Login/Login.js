@@ -62,7 +62,12 @@ function Login({handleLogin}) {
     return (
         <section className="login">
             <div className="login__wrapper">
-                <img className="login__logo" alt="логотип" src={logo}/>
+                <Link to="/" >
+                    <img
+                        className="login__logo"
+                        alt="Логотип проекта"
+                        src={logo}
+                    /></Link>
                 <h2 className="login__title">Рады видеть!</h2>
             </div>
             <form className="login__container" name="login" onSubmit={handleSubmit} noValidate>
