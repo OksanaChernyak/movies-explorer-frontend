@@ -19,14 +19,13 @@ function SearchForm({handleSearchButtonClick}) {
     //поменяй состояние чекбокса, если в локалке есть короткометражки
     useEffect(() => {
         setShortie(JSON.parse(localStorage.getItem("shortie")))
-    }, []);
+    }, [shortie]);
 
     //отправка формы поиска - кнопка найти
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!searchRequest) {
             setSearchError("Нужно ввести ключевое слово")
-
         } else {
             setSearchError("")
             handleSearchButtonClick(searchRequest, shortie);

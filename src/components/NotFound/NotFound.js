@@ -1,9 +1,9 @@
 import "./NotFound.css";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function NotFound() {
     const navigate = useNavigate();
-    const goBack = () => navigate(-2);
+    const goBack = () => navigate(-1);
     return (
         <section className="not-found">
 <h2 className="not-found__title">404</h2>

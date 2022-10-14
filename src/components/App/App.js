@@ -39,14 +39,18 @@ function App() {
         if (loggedIn) {
             navigate("/movies")
         }
-    }, [loggedIn]);
+    }, []);
 
     useEffect(() => {
         mainApi.getUserData()
             .then((user) => {
                 setLoggedIn(true)
                 setCurrentUser(user);
-                getMoviesFromApi();
+                if(!localStorage.getItem("movies")) {
+                    getMoviesFromApi();
+                } else {
+                   setApiItems(JSON.parse(localStorage.getItem("movies")))
+                }
                 getMySavedMovies(user._id);
             })
             .catch((err) => {
@@ -116,7 +120,6 @@ function App() {
         setApiItems([]);
         setSavedMovies([]);
         setLoggedIn(false);
-
         navigate("/");
     };
     // при изменении профиля что происходит

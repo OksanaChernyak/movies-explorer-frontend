@@ -7,23 +7,34 @@ import Footer from "../Footer/Footer";
 
 
 function Movies({isMovies, isLiked, apiItems, isPreloaderActive, savedMovies, handleMovieDelete, handleMovieLike}) {
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchResult, setSearchResult] = useState(localStorage.getItem("mySearch") ? JSON.parse(localStorage.getItem("myFound")) : []);
     const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
+    console.log(searchResult)
+
 
     useEffect(() => {
         showSearchResult();
-    }, []);
+    }, [setSearchResult]);
 
     const handleSearchButtonClick = (searchRequest, shortie) => {
         const searchResult = apiItems.filter((item) => item.nameRU.toLowerCase().includes(searchRequest.toLowerCase()));
         shortie ? setSearchResult(searchResult.filter((item) => item.duration <= 40)) : setSearchResult(searchResult);
         (searchResult.length > 0) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
         localStorage.setItem("mySearch", JSON.stringify(searchRequest));
+        localStorage.setItem("myFound", JSON.stringify(searchResult));
     }
 
     const showSearchResult = () => {
         if (localStorage.getItem("mySearch")) {
             setSearchResult(apiItems.filter((item) => item.nameRU.toLowerCase().includes(JSON.parse(localStorage.getItem("mySearch")).toLowerCase())));
+            localStorage.setItem("myFound", JSON.stringify(searchResult));
+            (JSON.parse(localStorage.getItem("myFound"))) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
+
+            if (localStorage.getItem("shortie")) {
+                const searchResult = apiItems.filter((item) => item.nameRU.toLowerCase().includes((JSON.parse(localStorage.getItem("mySearch"))).toLowerCase()));
+                setSearchResult(searchResult.filter((item) => item.duration <= 40));
+               (JSON.parse(localStorage.getItem("myFound"))) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
+            }
         } else {
             setSearchResult([])
         }

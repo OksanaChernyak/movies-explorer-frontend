@@ -14,6 +14,7 @@ function SavedMovies({isMovies, savedMovies, isLiked, isMovieLiked, handleMovieD
     }, []);
 
     const handleSearchButtonClick = (searchRequest, shortie) => {
+        console.log(shortie)
         const searchResult = savedMovies.filter((item) => item.nameRU.includes(searchRequest));
         shortie ? setSearchResult(searchResult.filter((item) => item.duration <= 40)) : setSearchResult(searchResult);
         (searchResult.length > 0) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
