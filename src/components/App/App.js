@@ -33,7 +33,7 @@ function App() {
 
     useEffect(() => {
         tokenCheck()
-    }, []);
+    }, [loggedIn]);
 
     useEffect(() => {
         if (loggedIn) {
@@ -46,10 +46,10 @@ function App() {
             .then((user) => {
                 setLoggedIn(true)
                 setCurrentUser(user);
-                if(!localStorage.getItem("movies")) {
+                if (!localStorage.getItem("movies")) {
                     getMoviesFromApi();
                 } else {
-                   setApiItems(JSON.parse(localStorage.getItem("movies")))
+                    setApiItems(JSON.parse(localStorage.getItem("movies")))
                 }
                 getMySavedMovies(user._id);
             })
@@ -60,7 +60,7 @@ function App() {
     }, [user]);
 
 
-   //функция регистрации
+    //функция регистрации
     const handleRegister = ({name, email, password}) => {
         setIsPreloaderActive(true);
         mainApi.register({name, email, password})
@@ -83,7 +83,7 @@ function App() {
                 ;
             })
     };
-   //функция логина
+    //функция логина
     const handleLogin = ({email, password}) => {
         setIsPreloaderActive(true);
         mainApi.login({email, password})
@@ -108,7 +108,7 @@ function App() {
                 ;
             })
     };
-   //выход из профиля
+    //выход из профиля
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("shortie");
@@ -161,16 +161,16 @@ function App() {
                     setNotification({text: "Переданный токен некорректен. Вам отказано в доступе"})
                     handleLogout();
                 })
-        } else {
-            handleLogout();
-            setIsInfoPopupOpen(true);
-            setNotification({text: "Переданный токен некорректен. Вам отказано в доступе"})
+            //  } else {
+            //  handleLogout();
+            // setIsInfoPopupOpen(true);
+            //  setNotification({text: "Переданный токен некорректен. Вам отказано в доступе"})
         }
     }
     //получим массив со стороннего апи
     const getMoviesFromApi = () => {
         setIsPreloaderActive(true);
-         moviesApi.getMovies().then(
+        moviesApi.getMovies().then(
             (apiItems) => {
                 if (apiItems) {
                     setApiItems(apiItems);
@@ -259,13 +259,13 @@ function App() {
             <div className="page">
                 <div className="page__content">
                     <Routes>
-                        <Route path="/signin"
+                        <Route exact path="/signin"
                                element={<Login loggedIn={loggedIn} handleLogin={handleLogin}
                                                tokenCheck={tokenCheck}/>}/>
-                        <Route path="/signup"
+                        <Route exact path="/signup"
                                element={<Register loggedIn={loggedIn} handleRegister={handleRegister}/>}/>
 
-                        <Route path="/movies"
+                        <Route exact path="/movies"
                                element={<ProtectedRoute path="/movies" loggedIn={loggedIn}><Movies apiItems={apiItems}
                                                                                                    isPreloaderActive={isPreloaderActive}
                                                                                                    isMovies={true}
@@ -274,16 +274,18 @@ function App() {
                                                                                                    handleMovieLike={handleMovieLike}
                                                                                                    handleMovieDelete={handleMovieDelete}
                                /></ProtectedRoute>}/>
-                        <Route path="/saved-movies"
+                        <Route exact path="/saved-movies"
                                element={<ProtectedRoute path="/saved-movies" loggedIn={loggedIn}><SavedMovies
-                                   savedMovies={savedMovies} isLiked={isLiked} isMovies={false} handleMovieDelete={handleMovieDelete}
+                                   savedMovies={savedMovies} isLiked={isLiked} isMovies={false}
+                                   handleMovieDelete={handleMovieDelete}
                                /></ProtectedRoute>}/>
-                        <Route path="/profile"
+                        <Route exact path="/profile"
                                element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile
                                    profile={currentUser} handleLogout={handleLogout}
                                    handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
-                        <Route path="/*" element={<NotFound/>}/>
-                        <Route path="/" element={<Main loggedIn={loggedIn}/>}/>
+
+                        <Route exact path="/" element={<Main loggedIn={loggedIn}/>}/>
+                        <Route path="*" element={<NotFound/>}/>
 
                     </Routes>
                     <Preloader isPreloaderActive={isPreloaderActive}/>
