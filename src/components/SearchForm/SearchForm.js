@@ -15,6 +15,7 @@ function SearchForm({handleSearchButtonClick}) {
                 setSearchRequest(JSON.parse(mySearch))
             }
         }
+        localStorage.setItem("savedShortie", JSON.stringify(false));
     }, []);
 
     //поменяй состояние чекбокса, если в локалке есть короткометражки

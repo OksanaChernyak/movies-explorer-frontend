@@ -9,9 +9,6 @@ function SavedMovies({isMovies, savedMovies, isLiked, isMovieLiked, handleMovieD
     const [searchResult, setSearchResult] = useState(localStorage.getItem("liked") ? JSON.parse(localStorage.getItem("liked")) : []);
     const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
 
-    useEffect(()=> {
-        localStorage.setItem("savedShortie", JSON.stringify(false));
-    }, []);
   //  useEffect(()=> {
   //      showSearchResult();
   //  }, []);
