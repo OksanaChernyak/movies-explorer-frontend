@@ -20,7 +20,7 @@ function MoviesCard({movie, handleMovieDelete, isLiked, savedMovies, handleMovie
     };
 
     const handleDelete = () => {
-        handleMovieDelete(movie._id);
+        handleMovieDelete(movie);
         setIsSaved(false)
     };
 

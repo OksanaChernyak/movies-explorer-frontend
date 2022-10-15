@@ -115,6 +115,10 @@ function App() {
         localStorage.removeItem("liked");
         localStorage.removeItem("mySearch");
         localStorage.removeItem("movies");
+        localStorage.removeItem("myFound");
+        localStorage.removeItem("savedShortie");
+        localStorage.removeItem("mySavedSearch")
+
         localStorage.clear();
         setCurrentUser({});
         setApiItems([]);
@@ -161,10 +165,6 @@ function App() {
                     setNotification({text: "Переданный токен некорректен. Вам отказано в доступе"})
                     handleLogout();
                 })
-            //  } else {
-            //  handleLogout();
-            // setIsInfoPopupOpen(true);
-            //  setNotification({text: "Переданный токен некорректен. Вам отказано в доступе"})
         }
     }
     //получим массив со стороннего апи
@@ -226,23 +226,16 @@ function App() {
     //обработка удаления
     const handleMovieDelete = (someMovie) => {
         tokenCheck();
-        savedMovies.map(
-            (m) => {
-                if (m._id === someMovie) {
-                    mainApi.deleteMovie(someMovie)
-                        .then((res) => {
-                            setSavedMovies(savedMovies.filter(m => m._id !== someMovie));
-                            console.log(someMovie)
-                            localStorage.getItem(
-                                "liked",
-                                savedMovies.filter(m => m._id !== someMovie)
-                            );
-                            isLiked(someMovie)
-                        })
-                        .catch((err) => {
-                            console.log(err)
-                        })
-                }
+        mainApi.deleteMovie(someMovie._id)
+            .then(() => {
+                setSavedMovies(savedMovies => savedMovies.filter(m => m._id !== someMovie._id));
+                localStorage.setItem(
+                    "liked",
+                    JSON.stringify(savedMovies.filter(m => m._id !== someMovie._id))
+                );
+            })
+            .catch((err) => {
+                console.log(err)
             })
     }
     // функция для пробрасывания лайкнутости в фильмы и сохраненные фильмы - нашли есть ли подходящие элементы - значит тру
@@ -259,13 +252,13 @@ function App() {
             <div className="page">
                 <div className="page__content">
                     <Routes>
-                        <Route exact path="/signin"
+                        <Route path="/signin"
                                element={<Login loggedIn={loggedIn} handleLogin={handleLogin}
                                                tokenCheck={tokenCheck}/>}/>
-                        <Route exact path="/signup"
+                        <Route path="/signup"
                                element={<Register loggedIn={loggedIn} handleRegister={handleRegister}/>}/>
 
-                        <Route exact path="/movies"
+                        <Route path="/movies"
                                element={<ProtectedRoute path="/movies" loggedIn={loggedIn}><Movies apiItems={apiItems}
                                                                                                    isPreloaderActive={isPreloaderActive}
                                                                                                    isMovies={true}
@@ -274,18 +267,18 @@ function App() {
                                                                                                    handleMovieLike={handleMovieLike}
                                                                                                    handleMovieDelete={handleMovieDelete}
                                /></ProtectedRoute>}/>
-                        <Route exact path="/saved-movies"
+                        <Route path="/saved-movies"
                                element={<ProtectedRoute path="/saved-movies" loggedIn={loggedIn}><SavedMovies
                                    savedMovies={savedMovies} isLiked={isLiked} isMovies={false}
                                    handleMovieDelete={handleMovieDelete}
                                /></ProtectedRoute>}/>
-                        <Route exact path="/profile"
+                        <Route path="/profile"
                                element={<ProtectedRoute path="/profile" loggedIn={loggedIn}><Profile
                                    profile={currentUser} handleLogout={handleLogout}
                                    handleChangeProfile={handleChangeProfile}/></ProtectedRoute>}/>
 
-                        <Route exact path="/" element={<Main loggedIn={loggedIn}/>}/>
-                        <Route path="*" element={<NotFound/>}/>
+                        <Route path="/" element={<Main loggedIn={loggedIn}/>}/>
+                        <Route path="/*" element={<NotFound/>}/>
 
                     </Routes>
                     <Preloader isPreloaderActive={isPreloaderActive}/>

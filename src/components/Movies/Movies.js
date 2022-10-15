@@ -30,10 +30,13 @@ function Movies({isMovies, isLiked, apiItems, isPreloaderActive, savedMovies, ha
             localStorage.setItem("myFound", JSON.stringify(searchResult));
             (JSON.parse(localStorage.getItem("myFound"))) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
 
-            if (localStorage.getItem("shortie")) {
+            if (JSON.parse(localStorage.getItem("shortie")) === true) {
                 const searchResult = (JSON.parse(localStorage.getItem("myFound"))).filter((item) => item.nameRU.toLowerCase().includes((JSON.parse(localStorage.getItem("mySearch"))).toLowerCase()));
                 setSearchResult(searchResult.filter((item) => item.duration <= 40));
-               (JSON.parse(localStorage.getItem("myFound"))) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
+                (JSON.parse(localStorage.getItem("myFound"))) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
+            } else if (JSON.parse(localStorage.getItem("shortie")) === false) {
+                const searchResult = (JSON.parse(localStorage.getItem("myFound"))).filter((item) => item.nameRU.toLowerCase().includes((JSON.parse(localStorage.getItem("mySearch"))).toLowerCase()));
+                setSearchResult(searchResult);
             }
         } else {
             setSearchResult([])

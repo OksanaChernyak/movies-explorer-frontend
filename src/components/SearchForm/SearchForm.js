@@ -5,21 +5,23 @@ import {useLocation} from "react-router-dom";
 function SearchForm({handleSearchButtonClick}) {
     let mySearch = localStorage.getItem("mySearch");
     const [searchRequest, setSearchRequest] = useState("");
+    const [savedShortie, setSavedShortie] = useState(false);
     const [shortie, setShortie] = useState((localStorage.getItem("shortie")) ? (JSON.parse(localStorage.getItem("shortie"))) : false);
     const [searchError, setSearchError] = useState((""));
     const location = useLocation();
-
     useEffect(() => {
         if (location.pathname === "/movies") {
-        if(mySearch) {
-            setSearchRequest(JSON.parse(mySearch))
-        }}
+            if (mySearch) {
+                setSearchRequest(JSON.parse(mySearch))
+            }
+        }
     }, []);
 
     //поменяй состояние чекбокса, если в локалке есть короткометражки
     useEffect(() => {
-        setShortie(JSON.parse(localStorage.getItem("shortie")))
-    }, [shortie]);
+        setShortie(JSON.parse(localStorage.getItem("shortie")));
+        setSavedShortie(JSON.parse(localStorage.getItem("savedShortie")))
+    }, []);
 
     //отправка формы поиска - кнопка найти
     const handleSubmit = (e) => {
@@ -27,31 +29,44 @@ function SearchForm({handleSearchButtonClick}) {
         if (!searchRequest) {
             setSearchError("Нужно ввести ключевое слово")
         } else {
-            setSearchError("")
-            handleSearchButtonClick(searchRequest, shortie);
-            localStorage.setItem("shortie", JSON.stringify(shortie))
+            setSearchError("");
+            if (location.pathname === "/movies") {
+                handleSearchButtonClick(searchRequest, shortie);
+                localStorage.setItem("shortie", false)
+            } else {
+                handleSearchButtonClick(searchRequest, savedShortie)
+                localStorage.setItem("savedShortie", false)
+            }
         }
+
     }
+
     //меняем состояние чекбокса
     const toggleCheckbox = () => {
         if (shortie) {
             setShortie(false);
+            setSavedShortie(false);
             handleSearchButtonClick(searchRequest, false);
-            localStorage.setItem("shortie", JSON.stringify(false))
+            if (location.pathname === "/movies")
+                localStorage.setItem("shortie", JSON.stringify(false))
+            else localStorage.setItem("savedShortie", JSON.stringify(false))
         } else {
             setShortie(true);
+            setSavedShortie(true);
             handleSearchButtonClick(searchRequest, true);
-            localStorage.setItem("shortie", JSON.stringify(true))
+            if (location.pathname === "/movies")
+                localStorage.setItem("shortie", JSON.stringify(true))
+            else localStorage.setItem("savedShortie", JSON.stringify(true))
         }
     }
     //при введении символов в инпут - меняется запрос
     const handleSearchInput = (e) => {
-            setSearchRequest(e.target.value);
+        setSearchRequest(e.target.value);
     }
 
     return (
         <section className="search">
-            <span className={"error error_active" }>{searchError}</span>
+            <span className={"error error_active"}>{searchError}</span>
             <div className="search__container">
                 <form className="search-form" onSubmit={handleSubmit} noValidate>
                     <input className="search-form__input" placeholder="Фильм" name="search" value={searchRequest}
@@ -62,7 +77,8 @@ function SearchForm({handleSearchButtonClick}) {
                 </form>
                 <div className="checkbox">
                     <label className="checkbox__label">
-                        <input type="checkbox"  className="checkbox__input" value="no" checked={shortie}
+                        <input type="checkbox" className="checkbox__input" value="no"
+                               checked={(location.pathname === "/movies") ? shortie : savedShortie}
                                onChange={toggleCheckbox}/>
                         Короткометражки
                     </label>
@@ -72,5 +88,6 @@ function SearchForm({handleSearchButtonClick}) {
         </section>
     )
 }
+
 
 export default SearchForm;
