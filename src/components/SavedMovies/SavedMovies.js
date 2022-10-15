@@ -29,9 +29,11 @@ function SavedMovies({isMovies, savedMovies, isLiked, isMovieLiked, handleMovieD
                 const searchResult = (JSON.parse(localStorage.getItem("liked"))).filter((item) => item.nameRU.toLowerCase().includes((JSON.parse(localStorage.getItem("mySavedSearch"))).toLowerCase()));
                 setSearchResult(searchResult.filter((item) => item.duration <= 40));
                 (searchResult.length > 0) ? setSomeMoviesFound(true) : setSomeMoviesFound(false);
+                localStorage.setItem("savedShortie", false);
             } else if (JSON.parse(localStorage.getItem("savedShortie")) === false) {
                 const searchResult = (JSON.parse(localStorage.getItem("liked"))).filter((item) => item.nameRU.toLowerCase().includes((JSON.parse(localStorage.getItem("mySavedSearch"))).toLowerCase()));
                 setSearchResult(searchResult);
+                localStorage.setItem("savedShortie", false);
             }
         }
         localStorage.setItem("savedShortie", false);
