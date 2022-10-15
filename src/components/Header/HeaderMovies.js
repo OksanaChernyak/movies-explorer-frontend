@@ -6,7 +6,7 @@ import Navigation from "../Navigation/Navigation";
 function HeaderMovies() {
     return (
         <header className="header-movies">
-            <Link to="/movies" >
+            <Link to="/" >
                 <img
                     className="header-movies__logo"
                     alt="Логотип проекта"

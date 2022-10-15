@@ -1,5 +1,6 @@
 import "./Main.css";
 import Header from "../Header/Header";
+import HeaderMovies from "../Header/HeaderMovies";
 import Promo from "../Promo/Promo";
 import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
@@ -7,10 +8,10 @@ import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 
-function Main() {
+function Main({loggedIn}) {
     return (
         <div className="landing-page">
-            <Header/>
+            {loggedIn ? (<HeaderMovies/>) : (<Header/>)}
             <main>
                 <Promo/>
                 <AboutProject/>

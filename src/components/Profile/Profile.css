@@ -66,6 +66,15 @@
     cursor: pointer;
     opacity: 0.8;
 }
+.profile__submit-button_disabled {
+    border: 0;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #A0A0A0;
+    margin: 204px auto 16px;
+    background: transparent;
+}
 
 .profile__signout-link {
     font-weight: 500;
@@ -80,6 +89,20 @@
 .profile__signout-link:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+.error {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    margin: 0;
+    box-sizing: border-box;
+    display: none;
+    min-height: 12px;
+    text-align: right;
+}
+.error_active {
+    display: block;
 }
 
 @media screen and (max-width: 768px) {

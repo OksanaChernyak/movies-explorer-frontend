@@ -1,4 +1,4 @@
-.not-found {
+.server-error {
     padding-top: 246px;
     padding-bottom: 60px;
     margin: 0 auto;
@@ -6,7 +6,7 @@
     flex-direction: column;
 }
 
-.not-found__title {
+.server-error__title {
     font-weight: 400;
     font-size: 140px;
     line-height: 169px;
@@ -16,7 +16,7 @@
     padding: 0;
 }
 
-.not-found__subtitle {
+.server-error__subtitle {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -25,49 +25,47 @@
     margin: 0 auto 184px;
     padding: 0;
 }
-.not-found__back-link {
+.server-error__back-link {
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #2BE080;
-    background: transparent;
     text-align: center;
     padding: 0;
     margin: 0 auto;
     text-decoration: none;
-    border: 0;
 }
 
-.not-found__back-link:hover {
+.server-error__back-link:hover {
     cursor: pointer;
     opacity: 0.7;
 }
 
 @media screen and (max-width: 768px) {
-    .not-found {
+    .server-error {
         padding-top: 408px;
         padding-bottom: 222px;
     }
 }
 
 @media screen and (max-width: 320px) {
-    .not-found {
+    .server-error {
         padding-top: 329px;
         padding-bottom: 30px;
     }
 
-    .not-found__title {
+    .server-error__title {
         font-size: 80px;
         line-height: 97px;
         margin-bottom: 10px;
     }
 
-    .not-found__subtitle {
+    .server-error__subtitle {
         font-size: 12px;
         line-height: 15px;
         margin-bottom: 284px;
     }
-    .not-found__back-link {
+    .server-error__back-link {
         font-size: 12px;
         line-height: 15px;
     }

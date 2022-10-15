@@ -71,8 +71,11 @@
     color: #EE3465;
     margin: 0;
     box-sizing: border-box;
-    display: block;
+    display: none;
     min-height: 12px;
+}
+.error_active {
+    display: block;
 }
 
 .login__submit-button {
@@ -91,6 +94,18 @@
 .login__submit-button:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+.login__submit-button_disabled {
+    border: 0;
+    border-radius: 3px;
+    background: #A0A0A0;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    height: 45px;
+    width: 100%;
+    margin-top: 192px;
 }
 
 .login__signup {
@@ -145,6 +160,11 @@
         margin-left: auto;
     }
     .login__submit-button {
+        margin-top: 257px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .login__submit-button_disabled {
         margin-top: 257px;
         font-size: 12px;
         line-height: 15px;
