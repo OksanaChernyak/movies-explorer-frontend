@@ -9,9 +9,9 @@ function SavedMovies({isMovies, savedMovies, isLiked, isMovieLiked, handleMovieD
     const [searchResult, setSearchResult] = useState(localStorage.getItem("liked") ? JSON.parse(localStorage.getItem("liked")) : []);
     const [someMoviesFound, setSomeMoviesFound] = useState(undefined);
 
-    useEffect(()=> {
-        showSearchResult();
-    }, []);
+  //  useEffect(()=> {
+  //      showSearchResult();
+  //  }, []);
 
     const handleSearchButtonClick = (searchRequest, shortie) => {
         const searchResult = savedMovies.filter((item) => item.nameRU.toLowerCase().includes(searchRequest.toLowerCase()));
