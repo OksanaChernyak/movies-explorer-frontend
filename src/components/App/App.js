@@ -33,7 +33,7 @@ function App() {
 
     useEffect(() => {
         tokenCheck()
-    }, [loggedIn]);
+    }, []);
 
     useEffect(() => {
         if (loggedIn) {

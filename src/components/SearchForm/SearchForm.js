@@ -45,18 +45,29 @@ function SearchForm({handleSearchButtonClick}) {
     const toggleCheckbox = () => {
         if (shortie) {
             setShortie(false);
-            setSavedShortie(false);
+           // setSavedShortie(false);
             handleSearchButtonClick(searchRequest, false);
             if (location.pathname === "/movies")
                 localStorage.setItem("shortie", JSON.stringify(false))
-            else localStorage.setItem("savedShortie", JSON.stringify(false))
+          //  else localStorage.setItem("savedShortie", JSON.stringify(false))
         } else {
             setShortie(true);
-            setSavedShortie(true);
+          //  setSavedShortie(true);
             handleSearchButtonClick(searchRequest, true);
             if (location.pathname === "/movies")
                 localStorage.setItem("shortie", JSON.stringify(true))
-            else localStorage.setItem("savedShortie", JSON.stringify(true))
+         //   else localStorage.setItem("savedShortie", JSON.stringify(true))
+        }
+    }
+    const toggleSavedCheckbox = () => {
+        if (savedShortie) {
+            setSavedShortie(false);
+            handleSearchButtonClick(searchRequest, false);
+            localStorage.setItem("savedShortie", JSON.stringify(false))
+        } else {
+            setSavedShortie(true);
+            handleSearchButtonClick(searchRequest, true);
+            localStorage.setItem("savedShortie", JSON.stringify(true))
         }
     }
     //при введении символов в инпут - меняется запрос
@@ -79,7 +90,7 @@ function SearchForm({handleSearchButtonClick}) {
                     <label className="checkbox__label">
                         <input type="checkbox" className="checkbox__input" value="no"
                                checked={(location.pathname === "/movies") ? shortie : savedShortie}
-                               onChange={toggleCheckbox}/>
+                               onChange={(location.pathname === "/movies") ? toggleCheckbox: toggleSavedCheckbox}/>
                         Короткометражки
                     </label>
                 </div>
